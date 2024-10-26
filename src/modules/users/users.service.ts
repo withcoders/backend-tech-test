@@ -48,6 +48,9 @@ export class UsersService {
   }
 
   async findOne(id: number) {
+    if (Number.isNaN(id)) {
+      throw new HttpException('Invalid ID', HttpStatus.BAD_REQUEST);
+    }
     try {
       const user = await this.prisma.user.findUniqueOrThrow({
         where: { id }
@@ -59,6 +62,9 @@ export class UsersService {
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
+    if (Number.isNaN(id)) {
+      throw new HttpException('Invalid ID', HttpStatus.BAD_REQUEST);
+    }
     try {
       const user = await this.prisma.user.update({
         where: { id },
@@ -76,6 +82,9 @@ export class UsersService {
   }
 
   async remove(id: number) {
+    if (Number.isNaN(id)) {
+      throw new HttpException('Invalid ID', HttpStatus.BAD_REQUEST);
+    }
     try {
       const deletedUSer = await this.prisma.user.delete({
         where: { id }

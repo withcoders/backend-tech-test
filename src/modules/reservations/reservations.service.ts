@@ -92,6 +92,9 @@ export class ReservationsService {
   }
 
   async findOne(id: number) {
+    if (Number.isNaN(id)) {
+      throw new HttpException('Invalid ID', HttpStatus.BAD_REQUEST);
+    }
     try {
       const user = await this.prisma.reservation.findUniqueOrThrow({
         where: { id }
@@ -103,6 +106,9 @@ export class ReservationsService {
   }
 
   async update(id: number, updateReservationDto: UpdateReservationDto) {
+    if (Number.isNaN(id)) {
+      throw new HttpException('Invalid ID', HttpStatus.BAD_REQUEST);
+    }
     const { tableNumber, reservedAt, numberOfGuests } = updateReservationDto;
     
     this.commonValidate({ tableNumber, numberOfGuests });
@@ -129,6 +135,9 @@ export class ReservationsService {
   }
 
   async remove(id: number) {
+    if (Number.isNaN(id)) {
+      throw new HttpException('Invalid ID', HttpStatus.BAD_REQUEST);
+    }
     try {
       const deletedReservation = await this.prisma.reservation.delete({
         where: {
