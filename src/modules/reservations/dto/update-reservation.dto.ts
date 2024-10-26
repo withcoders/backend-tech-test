@@ -1,5 +1,5 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsDateString, IsInt, IsNotEmpty, IsOptional } from 'class-validator';
+import { IsDateString, IsInt, IsNotEmpty, IsOptional, IsPositive } from 'class-validator';
 import { IsTimeInRange } from '../../../validations/is-time-in-range';
 import { CreateReservationDto } from './create-reservation.dto';
 
@@ -17,6 +17,7 @@ export class UpdateReservationDto  {
   
   @ApiProperty({ description: 'The number of guests for the reservation' })
   @IsInt()
+  @IsPositive()
   @IsOptional()
   numberOfGuests?: number;
 }

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDateString, IsInt, IsNotEmpty, IsString } from 'class-validator';
+import { IsDateString, IsInt, IsNotEmpty, IsPositive, IsString } from 'class-validator';
 import { IsTimeInRange } from '../../../validations/is-time-in-range';
 
 export class CreateReservationDto {
@@ -25,6 +25,7 @@ export class CreateReservationDto {
     example: 4,
   })
   @IsInt()
+  @IsPositive()
   @IsNotEmpty()
   numberOfGuests: number;
   
